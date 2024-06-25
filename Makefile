@@ -14,6 +14,18 @@ SRCS = $(wildcard src/*.cpp) $(wildcard src/hedgehog/protocol/proto/*.pb.cc)
 OBJS = $(subst src/,bin/,$(subst .pb.cc,.pb.o,$(subst .cpp,.o,$(SRCS))))
 # DEPS = $(subst .pb.cc,.pb.d,$(subst .cpp,.d,$(SRCS)))
 
+
+
+cmake:
+	cmake -B build
+	cmake --build build
+	build/main
+
+.PHONY: proto
+
+proto:
+	$(MAKE) -C proto all
+
 all: $(PROGRAM_NAME)
 	./$(PROGRAM_NAME)
 
